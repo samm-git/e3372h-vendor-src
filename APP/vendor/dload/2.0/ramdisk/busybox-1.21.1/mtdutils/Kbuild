@@ -1,0 +1,8 @@
+# DO NOT EDIT. This file is generated from Kbuild.src
+# BEGIN DTS2013052007435 QIUJIAN 00208481 2013-05-20 ADDED
+lib-y:=
+
+lib-$(CONFIG_MTDUTILS) += mtdutils.o 
+lib-$(CONFIG_MTDUTILS) += dload_ioctl.o 
+lib-$(CONFIG_MTDUTILS) += dload_debug.o 
+# END DTS2013052007435 QIUJIAN 00208481 2013-05-20 ADDED

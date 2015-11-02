@@ -1,0 +1,46 @@
+<manifest>    
+      
+  <remote fetch="ssh://10.97.84.145" name="balong" review="10.97.84.145:8080" />
+  <default remote="balong" revision="br_balong_ci_v8r1_pilot" sync-j="4" />                 
+
+ <project groups="drv,open" name="balong/llt/drv/common" path="vendor/hisi/llt/drv/common" /> 
+ <project groups="drv,open" name="balong/llt/drv/config" path="vendor/hisi/llt/drv/config" /> 
+ <project groups="drv,open" name="balong/llt/drv/hip5xx" path="vendor/hisi/llt/drv/hip5xx" /> 
+ <project groups="drv,open" name="balong/llt/drv/hi6620" path="vendor/hisi/llt/drv/hi6620" /> 
+ <project groups="drv,open" name="balong/llt/drv/hi6210" path="vendor/hisi/llt/drv/hi6210" /> 
+  <project groups="mit1,open" name="balong/llt/mit1" path="vendor/hisi/llt/mit1" />
+  <project groups="mit2,open" name="balong/llt/mit2" path="vendor/hisi/llt/mit2" />
+ 
+ <project groups="guas" name="balong/llt/gas" path="vendor/hisi/llt/gas" />
+ <project groups="guphy" name="balong/llt/rcm" path="vendor/hisi/llt/rcm" /> 
+ <project groups="guphy" name="balong/llt/guphy" path="vendor/hisi/llt/guphy" /> 
+ <project groups="ltphy" name="balong/llt/lphy" path="vendor/hisi/llt/lphy" /> 
+  <project groups="xphy" name="balong/llt/xphy" path="vendor/hisi/llt/xphy" />
+  <project groups="xphy" name="balong/llt/cproc" path="vendor/hisi/llt/cproc" />
+  <project groups="ltps" name="balong/llt/lps" path="vendor/hisi/llt/lps" />
+  <project groups="ltps" name="balong/llt/tps" path="vendor/hisi/llt/tps" />
+  <project groups="med,open" name="balong/llt/med/common" path="vendor/hisi/llt/med/common" />
+  <project groups="med,open" name="balong/llt/med/config" path="vendor/hisi/llt/med/config" />
+  <project groups="med,open" name="balong/llt/med/hi6620" path="vendor/hisi/llt/med/hi6620" />
+  <project groups="med,open" name="balong/llt/med/hi6210" path="vendor/hisi/llt/med/hi6210" />  
+  <project groups="med,open" name="balong/llt/med/hip5xx" path="vendor/hisi/llt/med/hip5xx" />
+  <project groups="nas,open" name="balong/llt/nas" path="vendor/hisi/llt/nas" />
+  <project groups="oam,open" name="balong/llt/oam" path="vendor/hisi/llt/oam" />
+  <project groups="nas,open" name="balong/llt/taf" path="vendor/hisi/llt/taf" />
+  <project groups="tools,open" name="balong/llt/tools" path="vendor/hisi/llt/tools" />
+  <project groups="ttf" name="balong/llt/ttf" path="vendor/hisi/llt/ttf" />
+  <project groups="ttf" name="balong/llt/cttf" path="vendor/hisi/llt/cttf" />
+  <project groups="guas" name="balong/llt/was" path="vendor/hisi/llt/was" />
+  <project groups="guas" name="balong/llt/cas" path="vendor/hisi/llt/cas" />
+ 
+ <project groups="open,tools" name="balong/tools/source/gu_equip" path="vendor/hisi/tools/source/gu_equip" /> 
+ <project groups="open,tools" name="balong/tools/source/lt_equip" path="vendor/hisi/tools/source/lt_equip" /> 
+ <project groups="ttf,drv,guas,guphy,xphy,ltphy,ltps,med,mit1,mit2,nas,oam,tools,modem,open" name="balong/llt/ci" path="vendor/hisi/llt/ci" />
+ 
+ <project groups="tools" name="balong/tools/build" path="vendor/hisi/tools/build" security="confidential" /> 
+ <project groups="default,tools,modem" name="balong/tools/config/gu" path="vendor/hisi/tools/config/gu" security="confidential" /> 
+ <project groups="tools" name="balong/tools/config/lt" path="vendor/hisi/tools/config/lt" security="confidential" /> 
+ <project groups="tools" name="balong/tools/source/gu_tool" path="vendor/hisi/tools/source/gu_tool" security="confidential" /> 
+ <project groups="tools" name="balong/tools/source/lt_tool" path="vendor/hisi/tools/source/lt_tool" security="confidential" />
+ 
+</manifest>

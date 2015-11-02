@@ -1,0 +1,4 @@
+lib-y:=
+
+INSERT
+lib-$(CONFIG_REBTEST) += rebtest.o 

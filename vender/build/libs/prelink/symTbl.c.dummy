@@ -1,0 +1,15 @@
+/* symTbl.c - standalone symbol tables wrapper */
+
+/* CREATED BY D:/WindRiver/vxworks-6.8/host/resource/hutils/tcl/makeSymTbl.tcl
+ *  WITH ARGS arm D:/V7R1C10B030/V7R1C10_main-0729/TARGET/delivery/P500_FPGA_DEV/obj/prelink/bootrom/SymImage.o D:/V7R1C10B030/V7R1C10_main-0729/TARGET/delivery/P500_FPGA_DEV/obj/prelink/bootrom/symTbl.c
+ *         ON Sat Jul 30 13:41:54 +0800 2011
+ */
+
+#include "vxWorks.h"
+#include "symbol.h"
+
+SYMBOL standTbl [1] =
+    {        {{NULL}, "", (char*) NULL, 0, 0, 0},
+    };
+
+ULONG standTblSize = 0;

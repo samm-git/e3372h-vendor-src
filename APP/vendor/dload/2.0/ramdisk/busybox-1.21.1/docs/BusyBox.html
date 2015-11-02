@@ -1,0 +1,734 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>BusyBox - The Swiss Army Knife of Embedded Linux</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#syntax">SYNTAX</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#usage">USAGE</a></li>
+	<li><a href="#common_options">COMMON OPTIONS</a></li>
+	<li><a href="#commands">COMMANDS</a></li>
+	<li><a href="#command_descriptions">COMMAND DESCRIPTIONS</a></li>
+	<li><a href="#libc_nss">LIBC NSS</a></li>
+	<li><a href="#maintainer">MAINTAINER</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+
+-->
+
+
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>BusyBox - The Swiss Army Knife of Embedded Linux</p>
+<p>
+</p>
+<hr />
+<h1><a name="syntax">SYNTAX</a></h1>
+<pre>
+ busybox &lt;applet&gt; [arguments...]  # or</pre>
+<pre>
+ &lt;applet&gt; [arguments...]          # if symlinked</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>BusyBox combines tiny versions of many common UNIX utilities into a single
+small executable. It provides minimalist replacements for most of the utilities
+you usually find in GNU coreutils, util-linux, etc. The utilities in BusyBox
+generally have fewer options than their full-featured GNU cousins; however, the
+options that are included provide the expected functionality and behave very
+much like their GNU counterparts.</p>
+<p>BusyBox has been written with size-optimization and limited resources in mind.
+It is also extremely modular so you can easily include or exclude commands (or
+features) at compile time. This makes it easy to customize your embedded
+systems. To create a working system, just add /dev, /etc, and a Linux kernel.
+BusyBox provides a fairly complete POSIX environment for any small or embedded
+system.</p>
+<p>BusyBox is extremely configurable.  This allows you to include only the
+components you need, thereby reducing binary size. Run 'make config' or 'make
+menuconfig' to select the functionality that you wish to enable.  Then run
+'make' to compile BusyBox using your configuration.</p>
+<p>After the compile has finished, you should use 'make install' to install
+BusyBox. This will install the 'bin/busybox' binary, in the target directory
+specified by CONFIG_PREFIX. CONFIG_PREFIX can be set when configuring BusyBox,
+or you can specify an alternative location at install time (i.e., with a
+command line like 'make CONFIG_PREFIX=/tmp/foo install'). If you enabled
+any applet installation scheme (either as symlinks or hardlinks), these will
+also be installed in the location pointed to by CONFIG_PREFIX.</p>
+<p>
+</p>
+<hr />
+<h1><a name="usage">USAGE</a></h1>
+<p>BusyBox is a multi-call binary.  A multi-call binary is an executable program
+that performs the same job as more than one utility program.  That means there
+is just a single BusyBox binary, but that single binary acts like a large
+number of utilities.  This allows BusyBox to be smaller since all the built-in
+utility programs (we call them applets) can share code for many common
+operations.</p>
+<p>You can also invoke BusyBox by issuing a command as an argument on the
+command line.  For example, entering</p>
+<pre>
+        /bin/busybox ls</pre>
+<p>will also cause BusyBox to behave as 'ls'.</p>
+<p>Of course, adding '/bin/busybox' into every command would be painful.  So most
+people will invoke BusyBox using links to the BusyBox binary.</p>
+<p>For example, entering</p>
+<pre>
+        ln -s /bin/busybox ls
+        ./ls</pre>
+<p>will cause BusyBox to behave as 'ls' (if the 'ls' command has been compiled
+into BusyBox).  Generally speaking, you should never need to make all these
+links yourself, as the BusyBox build system will do this for you when you run
+the 'make install' command.</p>
+<p>If you invoke BusyBox with no arguments, it will provide you with a list of the
+applets that have been compiled into your BusyBox binary.</p>
+<p>
+</p>
+<hr />
+<h1><a name="common_options">COMMON OPTIONS</a></h1>
+<p>Most BusyBox applets support the <strong>--help</strong> argument to provide a terse runtime
+description of their behavior.  If the CONFIG_FEATURE_VERBOSE_USAGE option has
+been enabled, more detailed usage information will also be available.</p>
+<p>
+</p>
+<hr />
+<h1><a name="commands">COMMANDS</a></h1>
+<p>Currently available applets include:</p>
+<pre>
+        add-shell, ash, cat, chmod, chown, cp, cttyhack, cut, dd, df, dmesg,
+        echo, free, halt, init, kill, killall, linuxrc, ls, mdev, mkdir,
+        mknod, mount, mtdutils, mv, poweroff, ps, pwd, rdev, reboot,
+        remove-shell, rm, rmdir, sh, stat, su, touch, umount, uname</pre>
+<p>
+</p>
+<hr />
+<h1><a name="command_descriptions">COMMAND DESCRIPTIONS</a></h1>
+<dl>
+<dt><strong><a name="add_shell" class="item"><strong>add-shell</strong></a></strong></dt>
+
+<dd>
+<p>add-shell SHELL...</p>
+<p>Add SHELLs to /etc/shells</p>
+</dd>
+<dt><strong><a name="ash" class="item"><strong>ash</strong></a></strong></dt>
+
+<dd>
+<p>ash [-/+OPTIONS] [-/+o OPT]... [-c 'SCRIPT' [ARG0 [ARGS]] / FILE [ARGS]]</p>
+<p>Unix shell interpreter</p>
+</dd>
+<dt><strong><a name="cat" class="item"><strong>cat</strong></a></strong></dt>
+
+<dd>
+<p>cat [FILE]...</p>
+<p>Concatenate FILEs and print them to stdout</p>
+</dd>
+<dt><strong><a name="chmod" class="item"><strong>chmod</strong></a></strong></dt>
+
+<dd>
+<p>chmod [-R] MODE[,MODE]... FILE...</p>
+<p>Each MODE is one or more of the letters ugoa, one of the
+symbols +-= and one or more of the letters rwxst</p>
+<pre>
+        -R      Recurse</pre>
+</dd>
+<dt><strong><a name="chown" class="item"><strong>chown</strong></a></strong></dt>
+
+<dd>
+<p>chown [-RhLHP]... OWNER[&lt;.|:&gt;[GROUP]] FILE...</p>
+<p>Change the owner and/or group of each FILE to OWNER and/or GROUP</p>
+<pre>
+        -R      Recurse
+        -h      Affect symlinks instead of symlink targets
+        -L      Traverse all symlinks to directories
+        -H      Traverse symlinks on command line only
+        -P      Don't traverse symlinks (default)</pre>
+</dd>
+<dt><strong><a name="cp" class="item"><strong>cp</strong></a></strong></dt>
+
+<dd>
+<p>cp [OPTIONS] SOURCE... DEST</p>
+<p>Copy SOURCE(s) to DEST</p>
+<pre>
+        -a      Same as -dpR
+        -R,-r   Recurse
+        -d,-P   Preserve symlinks (default if -R)
+        -L      Follow all symlinks
+        -H      Follow symlinks on command line
+        -p      Preserve file attributes if possible
+        -f      Overwrite
+        -i      Prompt before overwrite
+        -l,-s   Create (sym)links</pre>
+</dd>
+<dt><strong><a name="cttyhack" class="item"><strong>cttyhack</strong></a></strong></dt>
+
+<dd>
+<p>cttyhack [PROG ARGS]</p>
+<p>Give PROG a controlling tty if possible.
+Example for /etc/inittab (for busybox init):
+	::respawn:/bin/cttyhack /bin/sh
+Giving controlling tty to shell running with PID 1:
+	$ exec cttyhack sh
+Starting interactive shell from boot shell script:</p>
+<pre>
+        setsid cttyhack sh</pre>
+</dd>
+<dt><strong><a name="cut" class="item"><strong>cut</strong></a></strong></dt>
+
+<dd>
+<p>cut [OPTIONS] [FILE]...</p>
+<p>Print selected fields from each input FILE to stdout</p>
+<pre>
+        -b LIST Output only bytes from LIST
+        -c LIST Output only characters from LIST
+        -d CHAR Use CHAR instead of tab as the field delimiter
+        -s      Output only the lines containing delimiter
+        -f N    Print only these fields
+        -n      Ignored</pre>
+</dd>
+<dt><strong><a name="dd" class="item"><strong>dd</strong></a></strong></dt>
+
+<dd>
+<p><table cellspacing="0" cellpadding="0"><tr><td>dd [if=FILE] [of=FILE] [bs=N] [count=N] [skip=N]
+<tr><td><td>[seek=N]</table></p>
+<p>Copy a file with converting and formatting</p>
+<pre>
+        if=FILE         Read from FILE instead of stdin
+        of=FILE         Write to FILE instead of stdout
+        bs=N            Read and write N bytes at a time
+        count=N         Copy only N input blocks
+        skip=N          Skip N input blocks
+        seek=N          Skip N output blocks</pre>
+<p>Numbers may be suffixed by c (x1), w (x2), b (x512), kD (x1000), k (x1024),
+MD (x1000000), M (x1048576), GD (x1000000000) or G (x1073741824)</p>
+</dd>
+<dt><strong><a name="df" class="item"><strong>df</strong></a></strong></dt>
+
+<dd>
+<p>df [-Pk] [FILESYSTEM]...</p>
+<p>Print filesystem usage statistics</p>
+<pre>
+        -P      POSIX output format
+        -k      1024-byte blocks (default)</pre>
+</dd>
+<dt><strong><a name="dmesg" class="item"><strong>dmesg</strong></a></strong></dt>
+
+<dd>
+<p>dmesg [-c] [-n LEVEL] [-s SIZE]</p>
+<p>Print or control the kernel ring buffer</p>
+<pre>
+        -c              Clear ring buffer after printing
+        -n LEVEL        Set console logging level
+        -s SIZE         Buffer size</pre>
+</dd>
+<dt><strong><a name="echo" class="item"><strong>echo</strong></a></strong></dt>
+
+<dd>
+<p>echo [-neE] [ARG]...</p>
+<p>Print the specified ARGs to stdout</p>
+<pre>
+        -n      Suppress trailing newline
+        -e      Interpret backslash escapes (i.e., \t=tab)
+        -E      Don't interpret backslash escapes (default)</pre>
+</dd>
+<dt><strong><a name="free" class="item"><strong>free</strong></a></strong></dt>
+
+<dd>
+<p>free</p>
+<p>Display the amount of free and used system memory</p>
+</dd>
+<dt><strong><a name="halt" class="item"><strong>halt</strong></a></strong></dt>
+
+<dd>
+<p>halt [-d DELAY] [-n] [-f] [-w]</p>
+<p>Halt the system</p>
+<pre>
+        -d SEC  Delay interval
+        -n      Do not sync
+        -f      Force (don't go through init)
+        -w      Only write a wtmp record</pre>
+</dd>
+<dt><strong><a name="init" class="item"><strong>init</strong></a></strong></dt>
+
+<dd>
+<p>init</p>
+<p>Init is the parent of all processes</p>
+</dd>
+<dt><strong><a name="kill" class="item"><strong>kill</strong></a></strong></dt>
+
+<dd>
+<p>kill [-l] [-SIG] PID...</p>
+<p>Send a signal (default: TERM) to given PIDs</p>
+<pre>
+        -l      List all signal names and numbers</pre>
+</dd>
+<dt><strong><a name="killall" class="item"><strong>killall</strong></a></strong></dt>
+
+<dd>
+<p>killall [-l] [-q] [-SIG] PROCESS_NAME...</p>
+<p>Send a signal (default: TERM) to given processes</p>
+<pre>
+        -l      List all signal names and numbers
+        -q      Don't complain if no processes were killed</pre>
+</dd>
+<dt><strong><a name="ls" class="item"><strong>ls</strong></a></strong></dt>
+
+<dd>
+<p>ls [-1AaCxdLHRFplinserSXvctu] [FILE]...</p>
+<p>List directory contents</p>
+<pre>
+        -1      One column output
+        -a      Include entries which start with .
+        -A      Like -a, but exclude . and ..
+        -C      List by columns
+        -x      List by lines
+        -d      List directory entries instead of contents
+        -L      Follow symlinks
+        -H      Follow symlinks on command line
+        -R      Recurse
+        -p      Append / to dir entries
+        -F      Append indicator (one of */=@|) to entries
+        -l      Long listing format
+        -i      List inode numbers
+        -n      List numeric UIDs and GIDs instead of names
+        -s      List allocated blocks
+        -e      List full date and time
+        -r      Sort in reverse order
+        -S      Sort by size
+        -X      Sort by extension
+        -v      Sort by version
+        -c      With -l: sort by ctime
+        -t      With -l: sort by mtime
+        -u      With -l: sort by atime</pre>
+</dd>
+<dt><strong><a name="mdev" class="item"><strong>mdev</strong></a></strong></dt>
+
+<dd>
+<p>mdev [-s]</p>
+<p>mdev -s is to be run during boot to scan /sys and populate /dev.</p>
+<p><table cellspacing="0" cellpadding="0"><tr><td>Bare mdev is a kernel hotplug helper. To activate it:
+<tr><td><td>echo /sbin/mdev &gt;/proc/sys/kernel/hotplug</table></p>
+<p>It uses /etc/mdev.conf with lines
+	[-][ENV=regex;]...DEVNAME UID:GID PERM [&gt;|=PATH]|[!] [@|$|*PROG]
+where DEVNAME is device name regex, @major,minor[-minor2], or
+environment variable regex. A common use of the latter is
+to load modules for hotplugged devices:</p>
+<pre>
+        $MODALIAS=.* 0:0 660 @modprobe &quot;$MODALIAS&quot;</pre>
+<p>If /dev/mdev.seq file exists, mdev will wait for its value
+to match $SEQNUM variable. This prevents plug/unplug races.
+To activate this feature, create empty /dev/mdev.seq at boot.</p>
+<p>If /dev/mdev.log file exists, debug log will be appended to it.</p>
+</dd>
+<dt><strong><a name="mkdir" class="item"><strong>mkdir</strong></a></strong></dt>
+
+<dd>
+<p>mkdir [OPTIONS] DIRECTORY...</p>
+<p>Create DIRECTORY</p>
+<pre>
+        -m MODE Mode
+        -p      No error if exists; make parent directories as needed</pre>
+</dd>
+<dt><strong><a name="mknod" class="item"><strong>mknod</strong></a></strong></dt>
+
+<dd>
+<p>mknod [-m MODE] NAME TYPE MAJOR MINOR</p>
+<p>Create a special file (block, character, or pipe)</p>
+<pre>
+        -m MODE Creation mode (default a=rw)
+TYPE:
+        b       Block device
+        c or u  Character device
+        p       Named pipe (MAJOR and MINOR are ignored)</pre>
+</dd>
+<dt><strong><a name="mount" class="item"><strong>mount</strong></a></strong></dt>
+
+<dd>
+<p>mount [OPTIONS] [-o OPTS] DEVICE NODE</p>
+<p>Mount a filesystem. Filesystem autodetection requires /proc.</p>
+<pre>
+        -a              Mount all filesystems in fstab
+        -f              Dry run
+        -v              Verbose
+        -r              Read-only mount
+        -w              Read-write mount (default)
+        -t FSTYPE[,...] Filesystem type(s)
+        -O OPT          Mount only filesystems with option OPT (-a only)
+-o OPT:
+        remount         Remount a mounted filesystem, changing flags
+        ro/rw           Same as -r/-w</pre>
+<p>There are filesystem-specific -o flags.</p>
+</dd>
+<dt><strong><a name="mtdutils" class="item"><strong>mtdutils</strong></a></strong></dt>
+
+<dd>
+<p>mtdutils NoneNone</p>
+</dd>
+<dt><strong><a name="mv" class="item"><strong>mv</strong></a></strong></dt>
+
+<dd>
+<p>mv [-fin] SOURCE DEST
+or: mv [-fin] SOURCE... DIRECTORY</p>
+<p>Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY</p>
+<pre>
+        -f      Don't prompt before overwriting
+        -i      Interactive, prompt before overwrite
+        -n      Don't overwrite an existing file</pre>
+</dd>
+<dt><strong><a name="poweroff" class="item"><strong>poweroff</strong></a></strong></dt>
+
+<dd>
+<p>poweroff [-d DELAY] [-n] [-f]</p>
+<p>Halt and shut off power</p>
+<pre>
+        -d SEC  Delay interval
+        -n      Do not sync
+        -f      Force (don't go through init)</pre>
+</dd>
+<dt><strong><a name="ps" class="item"><strong>ps</strong></a></strong></dt>
+
+<dd>
+<p>ps</p>
+<p>Show list of processes</p>
+<pre>
+        w       Wide output</pre>
+</dd>
+<dt><strong><a name="pwd" class="item"><strong>pwd</strong></a></strong></dt>
+
+<dd>
+<p>pwd</p>
+<p>Print the full filename of the current working directory</p>
+</dd>
+<dt><strong><a name="rdev" class="item"><strong>rdev</strong></a></strong></dt>
+
+<dd>
+<p>rdev</p>
+<p>Print the device node associated with the filesystem mounted at '/'</p>
+</dd>
+<dt><strong><a name="reboot" class="item"><strong>reboot</strong></a></strong></dt>
+
+<dd>
+<p>reboot [-d DELAY] [-n] [-f]</p>
+<p>Reboot the system</p>
+<pre>
+        -d SEC  Delay interval
+        -n      Do not sync
+        -f      Force (don't go through init)</pre>
+</dd>
+<dt><strong><a name="remove_shell" class="item"><strong>remove-shell</strong></a></strong></dt>
+
+<dd>
+<p>remove-shell SHELL...</p>
+<p>Remove SHELLs from /etc/shells</p>
+</dd>
+<dt><strong><a name="rm" class="item"><strong>rm</strong></a></strong></dt>
+
+<dd>
+<p>rm [-irf] FILE...</p>
+<p>Remove (unlink) FILEs</p>
+<pre>
+        -i      Always prompt before removing
+        -f      Never prompt
+        -R,-r   Recurse</pre>
+</dd>
+<dt><strong><a name="rmdir" class="item"><strong>rmdir</strong></a></strong></dt>
+
+<dd>
+<p>rmdir [OPTIONS] DIRECTORY...</p>
+<p>Remove DIRECTORY if it is empty</p>
+<pre>
+        -p      Include parents</pre>
+</dd>
+<dt><strong><a name="sh" class="item"><strong>sh</strong></a></strong></dt>
+
+<dd>
+<p>sh [-/+OPTIONS] [-/+o OPT]... [-c 'SCRIPT' [ARG0 [ARGS]] / FILE [ARGS]]</p>
+<p>Unix shell interpreter</p>
+</dd>
+<dt><strong><a name="stat" class="item"><strong>stat</strong></a></strong></dt>
+
+<dd>
+<p>stat [OPTIONS] FILE...</p>
+<p>Display file (default) or filesystem status</p>
+<pre>
+        -c fmt  Use the specified format
+        -f      Display filesystem status
+        -L      Follow links
+        -t      Display info in terse form</pre>
+<p>Valid format sequences for files:</p>
+<pre>
+ %a     Access rights in octal
+ %A     Access rights in human readable form
+ %b     Number of blocks allocated (see %B)
+ %B     The size in bytes of each block reported by %b
+ %d     Device number in decimal
+ %D     Device number in hex
+ %f     Raw mode in hex
+ %F     File type
+ %g     Group ID of owner
+ %G     Group name of owner
+ %h     Number of hard links
+ %i     Inode number
+ %n     File name
+ %N     File name, with -&gt; TARGET if symlink
+ %o     I/O block size
+ %s     Total size, in bytes
+ %t     Major device type in hex
+ %T     Minor device type in hex
+ %u     User ID of owner
+ %U     User name of owner
+ %x     Time of last access
+ %X     Time of last access as seconds since Epoch
+ %y     Time of last modification
+ %Y     Time of last modification as seconds since Epoch
+ %z     Time of last change
+ %Z     Time of last change as seconds since Epoch</pre>
+<p>Valid format sequences for file systems:</p>
+<pre>
+ %a     Free blocks available to non-superuser
+ %b     Total data blocks in file system
+ %c     Total file nodes in file system
+ %d     Free file nodes in file system
+ %f     Free blocks in file system
+ %i     File System ID in hex
+ %l     Maximum length of filenames
+ %n     File name
+ %s     Block size (for faster transfer)
+ %S     Fundamental block size (for block counts)
+ %t     Type in hex
+ %T     Type in human readable form</pre>
+</dd>
+<dt><strong><a name="su" class="item"><strong>su</strong></a></strong></dt>
+
+<dd>
+<p>su [OPTIONS] [-] [USER]</p>
+<p>Run shell under USER (by default, root)</p>
+<pre>
+        -,-l    Clear environment, run shell as login shell
+        -p,-m   Do not set new $HOME, $SHELL, $USER, $LOGNAME
+        -c CMD  Command to pass to 'sh -c'
+        -s SH   Shell to use instead of user's default</pre>
+</dd>
+<dt><strong><a name="touch" class="item"><strong>touch</strong></a></strong></dt>
+
+<dd>
+<p>touch [-c] FILE...</p>
+<p>Update the last-modified date on the given FILE[s]</p>
+<pre>
+        -c      Don't create files</pre>
+</dd>
+<dt><strong><a name="umount" class="item"><strong>umount</strong></a></strong></dt>
+
+<dd>
+<p>umount [OPTIONS] FILESYSTEM|DIRECTORY</p>
+<p>Unmount file systems</p>
+<pre>
+        -a      Unmount all file systems
+        -r      Try to remount devices as read-only if mount is busy
+        -l      Lazy umount (detach filesystem)
+        -f      Force umount (i.e., unreachable NFS server)</pre>
+</dd>
+<dt><strong><a name="uname" class="item"><strong>uname</strong></a></strong></dt>
+
+<dd>
+<p>uname [-amnrspv]</p>
+<p>Print system information</p>
+<pre>
+        -a      Print all
+        -m      The machine (hardware) type
+        -n      Hostname
+        -r      OS release
+        -s      OS name (default)
+        -p      Processor type
+        -v      OS version</pre>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="libc_nss">LIBC NSS</a></h1>
+<p>GNU Libc (glibc) uses the Name Service Switch (NSS) to configure the behavior
+of the C library for the local environment, and to configure how it reads
+system data, such as passwords and group information.  This is implemented
+using an /etc/nsswitch.conf configuration file, and using one or more of the
+/lib/libnss_* libraries.  BusyBox tries to avoid using any libc calls that make
+use of NSS.  Some applets however, such as login and su, will use libc functions
+that require NSS.</p>
+<p>If you enable CONFIG_USE_BB_PWD_GRP, BusyBox will use internal functions to
+directly access the /etc/passwd, /etc/group, and /etc/shadow files without
+using NSS.  This may allow you to run your system without the need for
+installing any of the NSS configuration files and libraries.</p>
+<p>When used with glibc, the BusyBox 'networking' applets will similarly require
+that you install at least some of the glibc NSS stuff (in particular,
+/etc/nsswitch.conf, /lib/libnss_dns*, /lib/libnss_files*, and /lib/libresolv*).</p>
+<p>Shameless Plug: As an alternative, one could use a C library such as uClibc.  In
+addition to making your system significantly smaller, uClibc does not require the
+use of any NSS support files or libraries.</p>
+<p>
+</p>
+<hr />
+<h1><a name="maintainer">MAINTAINER</a></h1>
+<p>Denis Vlasenko &lt;<a href="mailto:vda.linux@googlemail.com">vda.linux@googlemail.com</a>&gt;</p>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<p>The following people have contributed code to BusyBox whether they know it or
+not.  If you have written code included in BusyBox, you should probably be
+listed here so you can obtain your bit of eternal glory.  If you should be
+listed here, or the description of what you have done needs more detail, or is
+incorrect, please send in an update.</p>
+<br><p>Emanuele Aina &lt;<a href="mailto:emanuele.aina@tiscali.it">emanuele.aina@tiscali.it</a>&gt;
+    run-parts</p>
+<br><p>Erik Andersen &lt;<a href="mailto:andersen@codepoet.org">andersen@codepoet.org</a>&gt;</p>
+<pre>
+    Tons of new stuff, major rewrite of most of the
+    core apps, tons of new apps as noted in header files.
+    Lots of tedious effort writing these boring docs that
+    nobody is going to actually read.</pre>
+<br><p>Laurence Anderson &lt;<a href="mailto:l.d.anderson@warwick.ac.uk">l.d.anderson@warwick.ac.uk</a>&gt;</p>
+<pre>
+    rpm2cpio, unzip, get_header_cpio, read_gz interface, rpm</pre>
+<br><p>Jeff Angielski &lt;<a href="mailto:jeff@theptrgroup.com">jeff@theptrgroup.com</a>&gt;</p>
+<pre>
+    ftpput, ftpget</pre>
+<br><p>Edward Betts &lt;<a href="mailto:edward@debian.org">edward@debian.org</a>&gt;</p>
+<pre>
+    expr, hostid, logname, whoami</pre>
+<br><p>John Beppu &lt;<a href="mailto:beppu@codepoet.org">beppu@codepoet.org</a>&gt;</p>
+<pre>
+    du, nslookup, sort</pre>
+<br><p>Brian Candler &lt;<a href="mailto:B.Candler@pobox.com">B.Candler@pobox.com</a>&gt;</p>
+<pre>
+    tiny-ls(ls)</pre>
+<br><p>Randolph Chung &lt;<a href="mailto:tausq@debian.org">tausq@debian.org</a>&gt;</p>
+<pre>
+    fbset, ping, hostname</pre>
+<br><p>Dave Cinege &lt;<a href="mailto:dcinege@psychosis.com">dcinege@psychosis.com</a>&gt;</p>
+<pre>
+    more(v2), makedevs, dutmp, modularization, auto links file,
+    various fixes, Linux Router Project maintenance</pre>
+<br><p>Jordan Crouse &lt;<a href="mailto:jordan@cosmicpenguin.net">jordan@cosmicpenguin.net</a>&gt;</p>
+<pre>
+    ipcalc</pre>
+<br><p>Magnus Damm &lt;<a href="mailto:damm@opensource.se">damm@opensource.se</a>&gt;</p>
+<pre>
+    tftp client insmod powerpc support</pre>
+<br><p>Larry Doolittle &lt;<a href="mailto:ldoolitt@recycle.lbl.gov">ldoolitt@recycle.lbl.gov</a>&gt;</p>
+<pre>
+    pristine source directory compilation, lots of patches and fixes.</pre>
+<br><p>Glenn Engel &lt;<a href="mailto:glenne@engel.org">glenne@engel.org</a>&gt;</p>
+<pre>
+    httpd</pre>
+<br><p>Gennady Feldman &lt;<a href="mailto:gfeldman@gena01.com">gfeldman@gena01.com</a>&gt;</p>
+<pre>
+    Sysklogd (single threaded syslogd, IPC Circular buffer support,
+    logread), various fixes.</pre>
+<br><p>Karl M. Hegbloom &lt;<a href="mailto:karlheg@debian.org">karlheg@debian.org</a>&gt;</p>
+<pre>
+    cp_mv.c, the test suite, various fixes to utility.c, &amp;c.</pre>
+<br><p>Daniel Jacobowitz &lt;<a href="mailto:dan@debian.org">dan@debian.org</a>&gt;</p>
+<pre>
+    mktemp.c</pre>
+<br><p>Matt Kraai &lt;<a href="mailto:kraai@alumni.cmu.edu">kraai@alumni.cmu.edu</a>&gt;</p>
+<pre>
+    documentation, bugfixes, test suite</pre>
+<br><p>Stephan Linz &lt;<a href="mailto:linz@li-pro.net">linz@li-pro.net</a>&gt;</p>
+<pre>
+    ipcalc, Red Hat equivalence</pre>
+<br><p>John Lombardo &lt;<a href="mailto:john@deltanet.com">john@deltanet.com</a>&gt;</p>
+<pre>
+    tr</pre>
+<br><p>Glenn McGrath &lt;<a href="mailto:bug1@iinet.net.au">bug1@iinet.net.au</a>&gt;</p>
+<pre>
+    Common unarchiving code and unarchiving applets, ifupdown, ftpgetput,
+    nameif, sed, patch, fold, install, uudecode.
+    Various bugfixes, review and apply numerous patches.</pre>
+<br><p>Manuel Novoa III &lt;<a href="mailto:mjn3@codepoet.org">mjn3@codepoet.org</a>&gt;</p>
+<pre>
+    cat, head, mkfifo, mknod, rmdir, sleep, tee, tty, uniq, usleep, wc, yes,
+    mesg, vconfig, make_directory, parse_mode, dirname, mode_string,
+    get_last_path_component, simplify_path, and a number trivial libbb routines</pre>
+<pre>
+    also bug fixes, partial rewrites, and size optimizations in
+    ash, basename, cal, cmp, cp, df, du, echo, env, ln, logname, md5sum, mkdir,
+    mv, realpath, rm, sort, tail, touch, uname, watch, arith, human_readable,
+    interface, dutmp, ifconfig, route</pre>
+<br><p>Vladimir Oleynik &lt;<a href="mailto:dzo@simtreas.ru">dzo@simtreas.ru</a>&gt;</p>
+<pre>
+    cmdedit; xargs(current), httpd(current);
+    ports: ash, crond, fdisk, inetd, stty, traceroute, top;
+    locale, various fixes
+    and irreconcilable critic of everything not perfect.</pre>
+<br><p>Bruce Perens &lt;<a href="mailto:bruce@pixar.com">bruce@pixar.com</a>&gt;</p>
+<pre>
+    Original author of BusyBox in 1995, 1996. Some of his code can
+    still be found hiding here and there...</pre>
+<br><p>Tim Riker &lt;<a href="mailto:Tim@Rikers.org">Tim@Rikers.org</a>&gt;</p>
+<pre>
+    bug fixes, member of fan club</pre>
+<br><p>Kent Robotti &lt;<a href="mailto:robotti@metconnect.com">robotti@metconnect.com</a>&gt;</p>
+<pre>
+    reset, tons and tons of bug reports and patches.</pre>
+<br><p>Chip Rosenthal &lt;<a href="mailto:chip@unicom.com">chip@unicom.com</a>&gt;, &lt;<a href="mailto:crosenth@covad.com">crosenth@covad.com</a>&gt;</p>
+<pre>
+    wget - Contributed by permission of Covad Communications</pre>
+<br><p>Pavel Roskin &lt;<a href="mailto:proski@gnu.org">proski@gnu.org</a>&gt;</p>
+<pre>
+    Lots of bugs fixes and patches.</pre>
+<br><p>Gyepi Sam &lt;<a href="mailto:gyepi@praxis-sw.com">gyepi@praxis-sw.com</a>&gt;</p>
+<pre>
+    Remote logging feature for syslogd</pre>
+<br><p>Linus Torvalds &lt;<a href="mailto:torvalds@transmeta.com">torvalds@transmeta.com</a>&gt;</p>
+<pre>
+    mkswap, fsck.minix, mkfs.minix</pre>
+<br><p>Mark Whitley &lt;<a href="mailto:markw@codepoet.org">markw@codepoet.org</a>&gt;</p>
+<pre>
+    grep, sed, cut, xargs(previous),
+    style-guide, new-applet-HOWTO, bug fixes, etc.</pre>
+<br><p>Charles P. Wright &lt;<a href="mailto:cpwright@villagenet.com">cpwright@villagenet.com</a>&gt;</p>
+<pre>
+    gzip, mini-netcat(nc)</pre>
+<br><p>Enrique Zanardi &lt;<a href="mailto:ezanardi@ull.es">ezanardi@ull.es</a>&gt;</p>
+<pre>
+    tarcat (since removed), loadkmap, various fixes, Debian maintenance</pre>
+<br><p>Tito Ragusa &lt;<a href="mailto:farmatito@tiscali.it">farmatito@tiscali.it</a>&gt;</p>
+<pre>
+    devfsd and size optimizations in strings, openvt and deallocvt.</pre>
+<br><p>Paul Fox &lt;<a href="mailto:pgf@foxharp.boston.ma.us">pgf@foxharp.boston.ma.us</a>&gt;</p>
+<pre>
+    vi editing mode for ash, various other patches/fixes</pre>
+<br><p>Roberto A. Foglietta &lt;<a href="mailto:me@roberto.foglietta.name">me@roberto.foglietta.name</a>&gt;</p>
+<pre>
+    port: dnsd</pre>
+<br><p>Bernhard Reutner-Fischer &lt;<a href="mailto:rep.dot.nop@gmail.com">rep.dot.nop@gmail.com</a>&gt;</p>
+<pre>
+    misc</pre>
+<br><p>Mike Frysinger &lt;<a href="mailto:vapier@gentoo.org">vapier@gentoo.org</a>&gt;</p>
+<pre>
+    initial e2fsprogs, printenv, setarch, sum, misc</pre>
+<br><p>Jie Zhang &lt;<a href="mailto:jie.zhang@analog.com">jie.zhang@analog.com</a>&gt;</p>
+<pre>
+    fixed two bugs in msh and hush (exitcode of killed processes)</pre>
+
+</body>
+
+</html>

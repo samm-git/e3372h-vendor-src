@@ -1,0 +1,86 @@
+.\" $Header: /FNT-CVS-ATP_V100R002-CODE/ATPV100R002C03/application/service/userapp/opensrc/libosip2/help/man/osip.1,v 1.1 2008/05/09 09:30:57 y42304 Exp $
+.\"
+.\"	transcript compatibility for postscript use.
+.\"
+.\"	synopsis:  .P! <file.ps>
+.\"
+.de P!
+.fl
+\!!1 setgray
+.fl
+\\&.\"
+.fl
+\!!0 setgray
+.fl			\" force out current output buffer
+\!!save /psv exch def currentpoint translate 0 0 moveto
+\!!/showpage{}def
+.fl			\" prolog
+.sy sed -e 's/^/!/' \\$1\" bring in postscript file
+\!!psv restore
+.
+.de pF
+.ie     \\*(f1 .ds f1 \\n(.f
+.el .ie \\*(f2 .ds f2 \\n(.f
+.el .ie \\*(f3 .ds f3 \\n(.f
+.el .ie \\*(f4 .ds f4 \\n(.f
+.el .tm ? font overflow
+.ft \\$1
+..
+.de fP
+.ie     !\\*(f4 \{\
+.	ft \\*(f4
+.	ds f4\"
+'	br \}
+.el .ie !\\*(f3 \{\
+.	ft \\*(f3
+.	ds f3\"
+'	br \}
+.el .ie !\\*(f2 \{\
+.	ft \\*(f2
+.	ds f2\"
+'	br \}
+.el .ie !\\*(f1 \{\
+.	ft \\*(f1
+.	ds f1\"
+'	br \}
+.el .tm ? font underflow
+..
+.ds f1\"
+.ds f2\"
+.ds f3\"
+.ds f4\"
+'\" t 
+.ta 8n 16n 24n 32n 40n 48n 56n 64n 72n  
+.TH "LIBOSIP" "SECTION" 
+.SH "NAME" 
+libosip \(em The GNU oSIP library is a low layer SIP implementation. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fB#include <smsg.h>\fR 
+.PP 
+\fB#include <url.h>\fR 
+.PP 
+\fB#include <sdp.h>\fR 
+.PP 
+\fB-losip\fR [\fBThe url, SIP and SDP parsers\fP]  
+.PP 
+\fB#include <osip.h>\fR 
+.PP 
+\fB-lfsmtl\fR [\fBThe SIP transaction manager, the dialog manager\fP]  
+.SH "DESCRIPTION" 
+.PP 
+This manual page documents briefly the 
+\fBlibosip\fR library. 
+.PP 
+API reference & FAQ can be found at http://www.fsf.org/software/osip/ 
+.SH "AUTHOR" 
+.PP 
+This manual page was written by Aymeric Moizard jack@atosc.org for 
+the \fBDebian\fP system (but may be used by others).  Permission is 
+granted to copy, distribute and/or modify this document under 
+the terms of the GNU Free Documentation 
+License, Version 1.1 or any later version published by the Free 
+Software Foundation; with no Invariant Sections, no Front-Cover 
+Texts and no Back-Cover Texts. 
+.\" created by instant / docbook-to-man, Mon 12 Jul 2004, 18:39 

@@ -1,0 +1,11 @@
+interface br0
+{
+address-pool pool1 3600 7200;
+preference 255;
+};
+pool pool1
+{
+range 3333:0073:0000:0000:0000:0000:0000:0002 to 3333:0073:0000:0000:ffff:ffff:ffff:ffff;
+};
+option domain-name-servers fe80::214:25ff:fe36:7889;
+

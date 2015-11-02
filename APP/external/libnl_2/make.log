@@ -1,0 +1,33 @@
+/opt/CodeSourcery/Sourcery_G++_Lite/bin/arm-none-linux-gnueabi-gcc  -s -Os -fomit-frame-pointer -Wall -fPIC -shared -I/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers -L -liblog \
+	-o libnl_2.so attr.c cache.c genl/genl.c genl/family.c handlers.c msg.c netlink.c object.c socket.c dbg.c
+In file included from attr.c:23:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+In file included from genl/genl.c:27:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+genl/genl.c: In function 'genl_ctrl_alloc_cache':
+genl/genl.c:246:1: warning: label 'error' defined but not used
+In file included from genl/family.c:19:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+genl/family.c:21:28: warning: 'genl_family_find_byname' defined but not used
+In file included from handlers.c:20:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+In file included from msg.c:23:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+In file included from netlink.c:24:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+netlink.c: In function 'nl_recvmsgs':
+netlink.c:114:15: warning: unused variable 'flags'
+netlink.c:199:1: warning: label 'fail' defined but not used
+netlink.c:198:1: warning: label 'success' defined but not used
+In file included from object.c:19:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+In file included from socket.c:24:0:
+/home/m00172998/b100/BALONG_V7R1_C35B100/APP/application/service/userapp/opensrc/clat/libnl_2/external/libnl-headers/netlink-types.h:134:16: error: field 'nm_creds' has incomplete type
+socket.c: In function 'nl_socket_add_membership':
+socket.c:29:30: error: 'SOL_NETLINK' undeclared (first use in this function)
+socket.c:29:30: note: each undeclared identifier is reported only once for each function it appears in
+socket.c: In function '_nl_socket_alloc':
+socket.c:38:16: warning: unused variable 'cb'
+socket.c: In function 'nl_socket_add_membership':
+socket.c:31:1: warning: control reaches end of non-void function
+make: *** [all] Error 1

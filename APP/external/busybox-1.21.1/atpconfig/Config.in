@@ -1,0 +1,162 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+menu "atp Utilities"
+
+config ATP_FTP
+	bool "atp_ftp"
+	default y
+	help
+	  Retrieve a remote file via FTP. Do not enable the ftpget/ftpput at the same time.
+
+config ATP_FTPGET
+	bool "Enable ftp download"
+	default y
+	depends on ATP_FTP
+	help
+	  Enable ftp download for atp_ftp applet.
+
+config ATP_FTPPUT
+	bool "Enable ftp upload"
+	default y
+	depends on ATP_FTP
+	help
+	  Enable ftp upload for atp_ftp applet.
+
+config FEATURE_ATP_FTP_ZIP
+	bool "Enable ftp download compress"
+	default y
+	depends on ATP_FTP
+	help
+	  Enable ftp download with compression.
+
+config ATP_PING
+	bool "Enable ping "
+	default y
+	help
+	  Enable ATP PING for atp_ping applet.
+
+config ATP_PING6
+	bool "Enable ping6"
+	default n
+	depends on FEATURE_IPV6
+	help
+	  Enable ATP PING6 for atp_ping applet.
+	  
+config FEATURE_ATP_FTPGETPUT_LONG_OPTIONS
+	bool "Enable long options in atp ftpget/ftpput"
+	default n
+	depends on GETOPT_LONG && (ATP_FTPGET || ATP_FTPPUT)
+	help
+	  Support long options for the ftpget/ftpput applet.
+
+config ATP_TFTP
+	bool "atp_tftp"
+	default y
+	help
+	  This enables the Trivial File Transfer Protocol client program.  TFTP
+	  is usually used for simple, small transfers such as a root image
+	  for a network-enabled bootloader. Do not enable the tftp at the same time.
+
+## config ATP_ARP
+##	bool "atp_arp"
+##	default y
+##	help
+##		support arp -c send arp packet to lan.
+	  
+config FEATURE_ATP_TFTP_GET
+	bool "Enable \"get\" command"
+	default y
+	depends on ATP_TFTP
+	help
+	  Add support for the GET command within the TFTP client.  This allows
+	  a client to retrieve a file from a TFTP server.
+
+config FEATURE_ATP_TFTP_PUT
+	bool "Enable \"put\" command"
+	default y
+	depends on ATP_TFTP
+	help
+	  Add support for the PUT command within the TFTP client.  This allows
+	  a client to transfer a file to a TFTP server.
+
+config FEATURE_ATP_TFTP_BLOCKSIZE
+	bool "Enable \"blocksize\" command"
+	default n
+	depends on ATP_TFTP
+	help
+	  Allow the client to specify the desired block size for transfers.
+
+config FEATURE_ATP_TFTP_ZIP
+	bool "Enable tftp download compress"
+	default y
+	depends on ATP_TFTP
+	help
+	  Enable tftp download with compression.
+
+config ATP_WGET
+	bool "atp_wget"
+	default y
+	help
+	  wget is a utility for non-interactive download of files from HTTP
+	  servers. Do not enable the wget at the same time.
+
+config FEATURE_ATP_WGET_STATUSBAR
+	bool "Enable a nifty process meter (+2k)"
+	default n
+	depends on ATP_WGET
+	help
+	  Enable the transfer progress bar for wget transfers.
+
+config FEATURE_ATP_WGET_AUTHENTICATION
+	bool "Enable HTTP authentication"
+	default y
+	depends on ATP_WGET
+	help
+	  Support authenticated HTTP transfers.
+
+config FEATURE_ATP_WGET_HTTPS
+	bool "Enable HTTPS"
+	default y
+	depends on ATP_WGET
+	help
+	  Support HTTPS transfers.
+
+config FEATURE_ATP_WGET_ZIP
+	bool "Enable http download compress"
+	default y
+	depends on ATP_WGET
+	help
+	  Enable http download with compression.
+
+config FEATURE_ATP_WGET_LONG_OPTIONS
+	bool "Enable long options"
+	default n
+	depends on ATP_WGET && GETOPT_LONG
+	help
+	  Support long options for the atp wget applet.
+
+##config ATP_MCAST
+##	bool "atp_mcast"
+##	default y
+##	help
+##	  mcast is a utility for non-interactive download of files from a multicast
+##	  channel. It can also listen for a channel for upgrading.
+
+##config FEATURE_ATP_MCAST_ZIP
+##	bool "Enable mcast download compress"
+##	default y
+##	depends on ATP_MCAST
+##	help
+##	  Enable mcast download with compression.
+
+config ATP_TRACEROUTE6
+	bool "Enable traceroute6"
+	default n
+	depends on FEATURE_IPV6
+	help
+	  Enable ATP TRACEROUTE6 for atp_traceroute6 applet.
+	  
+endmenu

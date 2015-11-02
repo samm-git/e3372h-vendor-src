@@ -1,0 +1,2 @@
+product=hi6921_v711_e5
+distclean

@@ -1,0 +1,7 @@
+# BEGIN DTS2013052007435 QIUJIAN 00208481 2013-05-20 ADDED
+config MTDUTILS 
+    bool "mtdutils"
+    default y
+    help
+    This is huawei mtdutils applte
+# END DTS2013052007435 QIUJIAN 00208481 2013-05-20 ADDED

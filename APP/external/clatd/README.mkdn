@@ -1,0 +1,19 @@
+# android-clat
+
+This project is for [464xlat](http://tools.ietf.org/html/draft-ietf-v6ops-464xlat) support for android.  It is useful for [ipv4 applications](https://docs.google.com/spreadsheet/ccc?key=0AnVbRg3DotzFdGVwZWlWeG5wXzVMcG5qczZEZloxWGc#gid=0) running on an IPv6-only network using NAT64/DNS64 to provide IPv4 access.
+
+## changes needed in other parts of android to use this project
+
+system/core - allocate a uid for clat
+
+frameworks/base - signal an ipv6-only PDP via the property gsm.pdpprotocol.ipv6, set the property gsm.defaultpdpcontext.interface to be the network interface name, and (optionally) ipv4 tethering support
+
+device/samsung/crespo - have init listen for the gsm.pdpprotocol.ipv6 property, and build external/android-clat (these changes are needed to port to other devices)
+
+See my other github repos to find these changes
+
+## optional changes
+
+system/netd - launch ipv6 tethering when ipv4 tethering is enabled
+
+external/radvd - needed for ipv6 tethering

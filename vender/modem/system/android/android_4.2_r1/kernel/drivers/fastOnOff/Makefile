@@ -1,0 +1,1 @@
+obj-y		+= fastOnOff.o

@@ -1,0 +1,6 @@
+config MBB_COMMON
+	bool "MBB_COMMON Support"
+	default y
+	help
+	  Say Y to enable Linux MBB_COMMON support.  This allows the E5 is 
+	  supporting mbb_common driver.

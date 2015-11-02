@@ -1,0 +1,60 @@
+#!/bin/sh
+#******************************************************************************
+#  Copyright  1988-2012, Huawei Tech. Co., Ltd.
+#  File name:      huawei_process_start(/etc/init.d/hwctl)
+#  Author: x00169879      Version:        Date: 20120405
+#  Description:  华为启动脚本
+#  Others:       
+#******************************************************************************
+#**********************问题单修改记录******************************************
+#日    期              修改人         问题单号           修改内容
+#20120523              x00169879          DTS2012052400256    修改路由和应用程序路径
+#20120524              x00169879          DTS2012052409368    新增PATH 和 LD_LIBRARY_PATH变量
+#******************************************************************************
+# Starts huawei process.
+
+set -e
+mkdir -p /var
+mkdir -p /var/run
+
+# Begin PN: DTS2012052506324 2012-05-25 added by f00178256 
+mkdir -p /webui/data
+# End   PN: DTS2012052506324 2012-05-25 added by f00178256 
+
+# Begin PN: DTS2012052409368 2012-05-25 added by x00169879 
+export PATH="$PATH:/app/bin"
+export LD_LIBRARY_PATH="/app/lib"
+# End PN: DTS2012052409368 2012-05-25 added by x00169879 
+case "$1" in
+  start)
+  	echo -n "Starting huawei process:"
+  	# Begin PN:DTS2012042507366 2012-07-07 added by x00169879
+	# start-stop-daemon -S -b -a /bin/diag_switch /dev/ttyHSL1 &
+	# End PN:DTS2012042507366 2012-07-07 added by x00169879
+  	start-stop-daemon -S -b -a /bin/huawei_M2A_qmi_server &
+  	# Begin PN: DTS2012052400256 2011-05-23 modified by x00169879 */
+  	start-stop-daemon -S -b -a npdaemon &
+	start-stop-daemon -S -b -a syswatch &
+	# End PN: DTS2012052400256 2011-05-23 modified by x00169879 */
+        # BEGIN DTS2012052400639 gaolei 2012-05-24 added for suspend
+	echo mem >/sys/power/state &
+	# END DTS2012052400639 gaolei 2012-05-24 added for suspend
+  	echo "done"
+        ;;
+
+  stop)
+        echo "Stopping huawei process"
+        start-stop-daemon -S -n /bin/huawei_M2A_qmi_server
+  	start-stop-daemon -S -n /bin/npdaemon 
+	start-stop-daemon -S -n /app/bin/syswatch 
+        ;;
+
+  restart)
+        $0 stop
+        $0 start
+        ;;
+  *)
+        echo "Usage huawei_process_start { start | stop | restart}" >&2
+        exit 1
+        ;;
+esac

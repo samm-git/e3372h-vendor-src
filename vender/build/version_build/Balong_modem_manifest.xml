@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>          
+<manifest>    
+      
+  <remote  name="balong"
+           fetch="ssh://10.97.84.145" review="10.97.84.145:8080" />
+  <default revision="br_balong_ci_v8r1_pilot"
+           remote="balong"
+           sync-j="4" />     
+ <project groups="default" name="divs/device/huawei/libs" path="device/huawei/libs" />
+  <project name="balong/phy/cphy" path="vendor/hisi/modem/phy/cphy" security="confidential" />		   
+ <project path="vendor/hisi/modem/drv/build" name="balong/drv/build" groups="default,modem"/>
+ <project path="vendor/hisi/modem/drv/common" name="balong/drv/common" groups="default,modem"/>
+ <project path="vendor/hisi/modem/drv/hi6210" name="balong/drv/hi6210" groups="default,modem"/>
+ <project path="vendor/hisi/modem/system/vxworks-6.8.2" name="balong/system/vxworks-6.8.2" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/system/rtosck" name="balong/system/rtosck" groups="default,modem" /> 
+
+ <project path="vendor/hisi/config/nvim/build" name="balong/config/nvim/build" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/nvim/data/gu" name="balong/config/nvim/data/gu" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/nvim/data/tl" name="balong/config/nvim/data/tl" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/nvim/data/comm" name="balong/config/nvim/data/comm" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/nvim/data/product" name="balong/config/nvim/data/product" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/nvim/include" name="balong/config/nvim/include" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/osa" name="balong/config/osa" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/config/product" name="balong/config/product" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/include" name="balong/include" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/platform" name="balong/platform" groups="default,modem" /> 
+
+ <project path="vendor/hisi/build" name="balong/build-balong" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/modem/oam/build/gu" name="balong/oam/build/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/build/comm" name="balong/oam/build/comm" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/build/lt" name="balong/oam/build/lt" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/gu" name="balong/oam/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/lt" name="balong/oam/lt" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/comm" name="balong/oam/comm" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/inc/gu" name="balong/oam/inc/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/inc/lt" name="balong/oam/inc/lt" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/oam/inc/comm" name="balong/oam/inc/comm" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/build" name="balong/ps/build" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/inc" name="balong/ps/inc" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/modem/ps/comm/build" name="balong/ps/comm/build" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/comm/inc" name="balong/ps/comm/inc" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/comm/comm" name="balong/ps/comm/comm" groups="default,tools,modem" /> 
+ <project path="vendor/hisi/modem/ps/comm/gu" name="balong/ps/comm/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/comm/tl" name="balong/ps/comm/lt" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/nas/build" name="balong/ps/nas/build" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/nas/comm" name="balong/ps/nas/comm" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/nas/gu" name="balong/ps/nas/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/nas/inc" name="balong/ps/nas/inc" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/ps/nas/tl" name="balong/ps/nas/lt" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/taf/build" name="balong/taf/build" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/taf/comm" name="balong/taf/comm" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/taf/gu" name="balong/taf/gu" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/taf/inc" name="balong/taf/inc" groups="default,modem" /> 
+ <project path="vendor/hisi/modem/taf/lt" name="balong/taf/lt" groups="default,modem" /> 
+  <!--balong confidential-->
+ 
+ <project path="vendor/hisi/modem/phy/build" name="balong/phy/build" groups="default,modem" security="confidential"/> 
+ <project path="vendor/hisi/modem/phy/comm" name="balong/phy/comm" groups="default,modem" security="confidential"/> 
+ <project path="vendor/hisi/modem/phy/gu" name="balong/phy/gu" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/phy/rcm" name="balong/phy/rcm" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/phy/inc" name="balong/phy/inc" groups="default,modem" security="confidential" />
+  <project path="vendor/hisi/modem/phy/lt" name="balong/phy/lt" groups="default,modem" security="confidential" />
+  <project path="vendor/hisi/modem/phy/proc" name="balong/phy/proc" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/build" name="balong/ps/as/build" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/inc" name="balong/ps/as/inc" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/comm" name="balong/ps/as/comm" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/gu/inc" name="balong/ps/as/gu/inc" groups="default,tools,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/gu/was" name="balong/ps/as/gu/was" groups="default,tools,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/gu/gas" name="balong/ps/as/gu/gas" groups="default,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/gu/ttf" name="balong/ps/as/gu/ttf" groups="default,tools,modem" security="confidential" />
+ <project path="vendor/hisi/modem/ps/as/gu/comm" name="balong/ps/as/gu/comm" groups="default,tools,modem" security="confidential"/> 
+ <project path="vendor/hisi/modem/ps/as/tl" name="balong/ps/as/lt" groups="default,modem" security="confidential"/> 
+  <project path="vendor/hisi/modem/ps/as/cdma/cas" name="balong/ps/as/cdma/cas" groups="default,modem" security="confidential" />
+  <project path="vendor/hisi/modem/ps/as/cdma/cttf" name="balong/ps/as/cdma/cttf" groups="default,modem" security="confidential" />
+  <project path="vendor/hisi/modem/ps/as/cdma/comm" name="balong/ps/as/cdma/comm" groups="default,modem" security="confidential" />
+  <project path="vendor/hisi/modem/ps/as/cdma/inc" name="balong/ps/as/cdma/inc" groups="default,modem" security="confidential" />
+</manifest>

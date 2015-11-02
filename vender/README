@@ -1,0 +1,7 @@
+  This file is the guide for build OPENSOURCE code。
+1、 Before you build the OPENSOURCE,you should install the fellow software:
+Ubuntu (10.04),java (1.6.0_45),Python (2.7.1),Ccache(无版本要求)；
+2、Download android4.2 source from the web site of android, and copy the prebuilds directory to the follow directory of the open source.
+   modem/system/android/android_4.2_r1/
+2、run the scripts.\build\build_acore.sh
+3、until it build succes.you can check the result.

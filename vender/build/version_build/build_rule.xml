@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<build_rule>
+		<!--each version's products to be compiled-->
+		
+		<BALONGV700R110>
+			<buildgroup name="hi6921_v711_udp" weight="5" producttype="phone"   >				
+				<rule productname="hi6921_v711_udp" />
+			</buildgroup>
+			<buildgroup name="hi6930_v7r2_udp" weight="5" producttype="phone"   >				
+				<rule productname="hi6930_v7r2_udp" />
+			</buildgroup>
+            <buildgroup name="hi6921_v711_udp_gul" weight="5" producttype="phone"   >				
+				<rule productname="hi6921_v711_udp_gul" />
+			</buildgroup>
+		</BALONGV700R110>
+		
+		<BALONGLIBS>
+			<buildgroup name="release" weight="2" producttype="libs"  >				
+				<rule productname="hi6921_v711_udp"  target= "core=ccore pkg" addname="rel_libs" buildtype="release" />
+                <rule productname="hi6921_v711_udp_gul"  target= "core=ccore pkg" addname="rel_libs" buildtype="release" />
+			</buildgroup>			
+		</BALONGLIBS>
+</build_rule>

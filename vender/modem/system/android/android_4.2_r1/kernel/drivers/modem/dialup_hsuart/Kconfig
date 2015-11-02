@@ -1,0 +1,13 @@
+#
+# Balong dialup hsuart driver configuration
+#
+
+comment "m2m hsuart driver"
+
+config M2M_HSUART
+	tristate "m2m hsuart"
+	default n
+	help
+		m2m hsuart
+		
+	

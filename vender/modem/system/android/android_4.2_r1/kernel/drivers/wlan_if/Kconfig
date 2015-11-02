@@ -1,0 +1,9 @@
+#
+# WLAN subsystem configuration
+#
+
+
+config WLAN_IF
+	bool "wlan interface"
+	help
+	      wlan interface

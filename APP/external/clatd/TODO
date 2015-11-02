@@ -1,0 +1,4 @@
+RA announcements race against setting forwarding
+ - change set_default_ipv6_route to see the next hop
+
+test fragmentation/frag needed

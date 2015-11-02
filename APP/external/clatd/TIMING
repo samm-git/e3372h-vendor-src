@@ -1,0 +1,125 @@
+setup:
+layer2 setup: 802.11g AP dedicated to these tests, no other clients.  laptop connected to AP via 100M ethernet
+laptop is setup to do nat64/plat with the software tayga
+handset is optionally setup to do nat46/clat with the software nat64d
+
+layer3:
+10.1.1.0/24 - local ipv4 subnet
+2001:470:xxxx:c::/64 - local ipv6 subnet
+2607:fb90:beef:feed::/96 - nat64 subnet
+10.1.2.183 - laptop's other ipv4 address
+
+tests:
+ipv4 only - traffic from handset to 10.1.1.2
+          path: handset->[layer2]->laptop
+ipv6 only - traffic from handset to 2001:470:xxxx:c::/64 subnet
+          path: handset->[layer2]->laptop
+plat only - ipv6 traffic from handset to 2607:fb90:beef:feed::10.1.2.183 (simulating dns64)
+          path: handset->[layer2]->laptop[tayga/plat]->laptop
+clat+plat - ipv4 traffic from handset to 10.1.2.183 (default route changed to point to local clat software)
+          path: handset->handset[nat64d/clat]->[layer2]->laptop[tayga/plat]->laptop
+
+icmp tested with ping/ping6
+
+tcp tested with:
+laptop: socat "system:dd if=/dev/zero bs=4096 count=20000" tcp6-listen:10000
+n900: socat tcp-connect:[method]:10000 stdio >/dev/null
+note: dd starts timing from when you start socat on the server, so start the client within 1 second of starting the server
+
+udp tested with:
+ttcp -l 5 -u -p 10000 -s -t -v -n 100000 [ip]
+ttcp -6 -s -r -p 10000 -v  -u
+
+
+icmp:
+ipv6 only ping, 100 packets: 100/100, 27.893/32.879/52.704
+ipv4 only ping, 100 packets: 100/100, 18.341/33.103/48.859
+plat only ping, 100 packets: 100/100, 25.543/32.204/50.171
+clat+plat ping, 100 packets: 100/100, 28.289/33.702/51.209
+
+icmp/without power saving:
+ipv4 only ping, 100 packets: 99/100, 2.044/3.284/6.501
+ipv6 only ping, 100 packets: 100/100, 2.594/3.378/5.401
+plat only ping, 100 packets: 100/100, 2.472/3.792/40.466
+clat+plat ping, 100 packets: 100/100, 2.838/4.240/42.725
+
+
+tcp:
+ipv6 only: 81920000 bytes (82 MB) copied, 150.604 s, 544 kB/s
+ipv4 only: 81920000 bytes (82 MB) copied, 120.054 s, 682 kB/s
+plat only: 81920000 bytes (82 MB) copied, 191.153 s, 429 kB/s
+plat+clat: 81920000 bytes (82 MB) copied, 114.53 s, 715 kB/s
+
+tcp/without power saving:
+ipv4 only: 81920000 bytes (82 MB) copied, 110.014 s, 745 kB/s
+ipv6 only: 81920000 bytes (82 MB) copied, 112.155 s, 730 kB/s
+plat only: 81920000 bytes (82 MB) copied, 155.883 s, 526 kB/s
+plat+clat: 81920000 bytes (82 MB) copied, 248.698 s, 329 kB/s 
+
+
+notes: 
+all transfers (native and translated) caused n900's interface to be
+extremely laggy (taking >1 second to register screen touches).  transfer speed
+as observed on a 1 second sample on the laptop jumped from ~770kB/s to ~400kB/s
+
+on a second run of ipv4 only: top shows 18% cpu used by [omap2_mcspi], 5% by socat, 4% by [wl12xx], and 60% idle
+on a second run of plat+clat: top shows 6-27% cpu used by [omap2_mcspi], 7-20% by nat64d, 3-5% by socat, 3-11% by [wl12xxx], and 30-60% idle
+
+first run of plat+clat socat: usage of nat64d(clat):
+packets:95123 bytes:87839880
+utime:519  stime:1190 (HZ=100)
+=~ 5.19s, 11.90s
+over 114.53s, that averages out to 15% cpu used
+
+second run of plat+clat socat: usage of nat64d(clat):
+packets:94356 bytes:87514196
+utime:500 stime:1268
+
+cpu: OMAP3430 / 600mhz
+bogomips 249.96
+
+
+
+---------------------------------------------------------------------------------------------
+
+android
+
+icmp:
+ipv4 only ping, 100 packets: 100/100, 1.461/10.807/16.961
+ipv6 only ping, 100 packets: 100/100, 3.404/10.875/16.483
+plat only ping, 100 packets: 100/100, 1.562/11.332/22.184
+clat+plat ping, 100 packets: 100/100, 4.408/12.430/21.832
+
+tcp:
+ipv4 only: 81920000 bytes (82 MB) copied, 29.6295 s, 2.8 MB/s
+ipv6 only: 81920000 bytes (82 MB) copied, 30.076 s, 2.7 MB/s
+plat only: 81920000 bytes (82 MB) copied, 30.3831 s, 2.7 MB/s
+clat+plat: 81920000 bytes (82 MB) copied, 31.4326 s, 2.6 MB/s
+
+packets:92586 bytes:87352048
+utime:3250ms stime:5450ms
+wall time: 32.1212 s
+27% cpu
+
+udp:
+ipv4 only: 500000 bytes in 23.84 real seconds = 20.49 KB/sec, 0% loss, 4880.429 pps
+ipv6 only: 499995 bytes in 23.96 real seconds = 20.38 KB/sec, 0% loss, 4173.622 pps
+plat only: 491245 bytes in 24.17 real seconds = 19.85 KB/sec, 0.02% loss, 4137.360 pps
+clat+plat: 499995 bytes in 22.62 real seconds = 21.58 KB/sec, 0% loss, 4420.866 pps
+
+utime:300ms stime:5730ms
+wall time: 22.62s
+=~27% cpu usage
+
+note: for udp on the android, the "-w1" flag was used to slow down the
+transmission rate.  Otherwise, ttcp would experience >75% packetloss on all
+transmission types.
+
+cpu: Exynos 3110 / 1ghz
+
+---------------------------------------------------------------------------------------------
+
+comparison: laptop to laptop
+tcp/ipv4: 81920000 bytes (82 MB) copied, 29.6431 s, 2.8 MB/s
+
+udp/ipv4: 500000 bytes in 13.12 real seconds = 37.20 KB/sec, 0% loss, 7621 pps

@@ -1,0 +1,6 @@
+# DO NOT EDIT. This file is generated from Config.src
+config REBTEST 
+    bool "rebtest"
+    default y
+    help
+    This is huawei rebtest applte

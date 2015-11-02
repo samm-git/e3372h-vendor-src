@@ -1,0 +1,11 @@
+$(call libc-add-cpu-variant-src,MEMCPY,arch-arm/bionic/memcpy.S)
+$(call libc-add-cpu-variant-src,MEMSET,arch-arm/bionic/memset.S)
+$(call libc-add-cpu-variant-src,STRCAT,arch-arm/cortex-softfloat/bionic/strcat.c)
+$(call libc-add-cpu-variant-src,STRCMP,arch-arm/bionic/strcmp.S)
+$(call libc-add-cpu-variant-src,STRCPY,arch-arm/cortex-softfloat/bionic/strcpy.c)
+$(call libc-add-cpu-variant-src,STRLEN,arch-arm/cortex-softfloat/bionic/strlen.c)
+$(call libc-add-cpu-variant-src,__MEMCPY_CHK,arch-arm/cortex-softfloat/bionic/__memcpy_chk.c)
+$(call libc-add-cpu-variant-src,__STRCPY_CHK,arch-arm/cortex-softfloat/bionic/__strcpy_chk.c)
+$(call libc-add-cpu-variant-src,__MEMSET_CHK,arch-arm/cortex-softfloat/bionic/__memset_chk.c)
+$(call libc-add-cpu-variant-src,__STRCAT_CHK,arch-arm/cortex-softfloat/bionic/__strcat_chk.c)
+include bionic/libc/arch-arm/generic/generic.mk

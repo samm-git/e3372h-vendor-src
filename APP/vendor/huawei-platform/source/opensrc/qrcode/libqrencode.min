@@ -1,0 +1,47 @@
+# 
+#============================================================================ 
+#  Project   :  libqrencode code
+#  Modul     :  .\websdk\common\zlib\websdk_zlib.min
+#----------------------------------------------------------------------------- 
+#  Copyright 2009 Huawei Technologies Co., Ltd 
+#                 All rights reserved. 
+# 
+#                 This file is confidential and a trade secret of Huawei 
+#                 Technologies Co., Ltd 
+#                 The receipt of or possession of this file does not convey 
+#                 any rights to reproduce or disclose its contents or to 
+#                 manufacture, use, or sell anything it may describe, in 
+#                 whole, or in part, without the specific written consent of 
+#                 Huawei Technologies Co., Ltd
+#+----------------------------------------------------------------------------- 
+#  Purpose   :  control zlib sources code
+#+----------------------------------------------------------------------------- 
+#  Author    :  caoxiongwei 00173007 
+#  Date      :  2010/12/23 
+#============================================================================ 
+
+
+#==============================================================================
+#*   在下面添加需要编译的代码路径
+#==============================================================================
+vpath %.c $(WEBSDK_ROOT)/qrcode/src
+
+
+
+#==============================================================================
+#*   在下面添加需要编译的代码文件名称
+#==============================================================================
+WEBSDK_LIBQRENCODE_SOURCES=\
+	bitstream.c \
+	mask.c \
+	mmask.c \
+	mqrspec.c \
+	qrencode.c \
+	qrinput.c \
+	qrspec.c \
+	rscode.c \
+	split.c 
+
+WEBSDK_QRCODE_OBJ :=  $(addprefix $(TARGETDIR)/, $(WEBSDK_LIBQRENCODE_SOURCES:%.c=%.o))
+WEBSDK_OBJ_LIST += $(WEBSDK_QRCODE_OBJ)
+

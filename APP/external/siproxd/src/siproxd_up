@@ -1,0 +1,8 @@
+#!/bin/sh
+iptables -I INPUT_SERVICE -i rmnet0 -p udp --dport 5060 -j ACCEPT
+iptables -I INPUT_SERVICE -i rmnet0 -p udp --dport 7070:7079 -j ACCEPT
+iptables -t nat -A PRE_SERVICE -i rmnet0 -p udp --dport 5060 -j ACCEPT
+iptables -t nat -A PRE_SERVICE -i rmnet0 -p udp --dport 7070:7079 -j ACCEPT
+iptables -t nat -I PRE_DONAT -i br0 -p udp --dport 5060 -j REDIRECT --to-ports 5060
+sleep 1
+/bin/siproxd --config /etc/siproxd.conf &

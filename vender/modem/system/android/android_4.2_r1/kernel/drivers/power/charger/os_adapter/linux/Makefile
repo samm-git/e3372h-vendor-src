@@ -1,0 +1,1 @@
+obj-y	+=	chg_os_adapter.o

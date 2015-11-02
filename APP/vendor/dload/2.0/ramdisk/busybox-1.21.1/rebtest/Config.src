@@ -1,0 +1,5 @@
+config REBTEST 
+    bool "rebtest"
+    default y
+    help
+    This is huawei rebtest applte

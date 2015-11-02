@@ -1,0 +1,18 @@
+# DO NOT EDIT. This file is generated from Kbuild.src
+# Makefile for busybox
+#
+# Copyright (C) 1999-2005 by Erik Andersen <andersen@codepoet.org>
+#
+# Licensed under the GPL v2, see the file LICENSE in this tarball.
+
+lib-y:=
+lib-y += atpcommon.o gplgethostbyname.o
+lib-$(CONFIG_ATP_FTPGET)       += ftpgetput.o
+lib-$(CONFIG_ATP_FTPPUT)       += ftpgetput.o
+lib-$(CONFIG_ATP_WGET)         += wget.o
+lib-$(CONFIG_ATP_TFTP)         += tftp.o
+#lib-$(CONFIG_ATP_MCAST)        += mcast.o
+lib-$(CONFIG_ATP_PING)         += ping.o
+lib-$(CONFIG_ATP_PING6)        += ping.o
+#lib-$(CONFIG_ATP_ARP)          += arp.o interface.o
+lib-$(CONFIG_ATP_TRACEROUTE6)     += traceroute6.o

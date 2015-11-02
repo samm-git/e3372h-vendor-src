@@ -1,0 +1,68 @@
+# 
+#============================================================================ 
+#  Project   :  upnp
+#  Modul     :  .\websdk\upnp.min
+#----------------------------------------------------------------------------- 
+#  Copyright 2009 Huawei Technologies Co., Ltd 
+#                 All rights reserved. 
+# 
+#                 This file is confidential and a trade secret of Huawei 
+#                 Technologies Co., Ltd 
+#                 The receipt of or possession of this file does not convey 
+#                 any rights to reproduce or disclose its contents or to 
+#                 manufacture, use, or sell anything it may describe, in 
+#                 whole, or in part, without the specific written consent of 
+#                 Huawei Technologies Co., Ltd
+#+----------------------------------------------------------------------------- 
+#  Purpose   :  
+#+----------------------------------------------------------------------------- 
+#  Author    :  
+#  Date      :  2011/11/10
+#============================================================================ 
+# 
+
+#**********************问题单修改记录******************************************
+#    日期              修改人         问题单号           修改内容
+# 
+#******************************************************************************
+
+
+
+#==============================================================================
+#*  
+#==============================================================================
+vpath %.c $(LOCAL_PATH)/src
+
+
+#==============================================================================
+#*   
+#==============================================================================
+
+WEBSDK_UPNP_SOURCES:=\
+        ipnat_rdr.c \
+        minissdp.c \
+        miniupnpd.c \
+        minixml.c \
+        natpmp.c \
+        upnpdescgen.c \
+        upnpevents.c \
+        upnpglobalvars.c \
+        upnphttp.c \
+        upnppermissions.c \
+        upnpredirect.c \
+        upnpreplyparse.c \
+        upnpsoap.c \
+        getifaddr.c \
+        upnputils.c \
+        options.c \
+        daemonize.c \
+        ifacewatcher.c \
+        getifstats.c \
+        getconnstatus.c
+
+
+
+WEBSDK_SMS_OBJ :=  $(addprefix $(TARGETDIR)/, $(WEBSDK_SMS_SOURCES:%.c=%.o))
+WEBSDK_OBJ_LIST += $(WEBSDK_SMS_OBJ)
+
+
